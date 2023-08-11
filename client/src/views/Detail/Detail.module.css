@@ -1,0 +1,68 @@
+
+.detailContainer{
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+    min-height: 100vh;
+    max-height: max-content;
+}
+
+.detail{
+    border: 1px solid red;
+    width: 700px;
+    height: 600px;
+    border-radius: 10px; 
+    display: grid;
+    place-items: center ;
+};
+.imgDetail{
+    border-radius: 5px;
+    border: 10px solid rgb(18, 18, 20);
+    height: 20rem;
+    width: 20rem;
+
+};
+
+.health{
+   margin: 10px;
+   font-size: 9rem;
+   border: 2px solid black;
+   background-color: blue;
+}
+
+.summary{
+    border: 2px solid rgb(22, 21, 21);
+    width: 100%;
+    padding: 15px 25px;
+    text-align: justify;
+    margin: 10px 0;
+    background-color: blueviolet;
+
+}
+
+.diets{
+    border: 2px solid rgb(22, 21, 21);
+    width: 100%;
+    padding: 15px 25px;
+    text-align: center  ;
+    margin: 10px 0;
+    background-color: blueviolet;
+}
+
+.steps{
+    border: 2px solid rgb(22, 21, 21);
+    width: 100%;
+    padding: 15px 25px;
+    text-align: justify;
+    margin: 10px 0;
+    background-color: blueviolet;
+}
+.lista{
+    list-style-type:upper-latin ;
+    list-style-position:initial ;
+}
+.listaStep{
+    list-style-type: upper-roman;
+    list-style-position:unset ;
+}
