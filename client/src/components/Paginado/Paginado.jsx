@@ -1,3 +1,4 @@
+import style from "./Paginado.module.css";
 const Paginado = ({recetasPorPagina, paginaActual, setPaginaActual, totalRecipes})=>{
 const pageNumber= [];
 
@@ -18,7 +19,7 @@ const especifico = (n)=>{
     setPaginaActual(n)
 };
     return(
-        <div>
+        <div className={style.paginadoContainer} key="paginadoContainer">
             <button disabled={paginaActual === 1} onClick={anterior}>Previus</button>
             
                 {pageNumber.map(noPage=>(

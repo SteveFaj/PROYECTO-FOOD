@@ -29,9 +29,10 @@ const getAllRecipeHandler = async(req, res)=>{
 
 const createRecipeHandler = async (req, res)=>{
  try{
-    const {title, summary, healtScore, image, diets, steps} = req.body;
-    const nuevaRecipe = await createRecipe(title, summary, healtScore, image, diets, steps);
-    res.status(201).json( nuevaRecipe);
+    const {title, summary, healthScore, image,  steps, diets,} = req.body;
+    console.log(diets, "dietts");
+    const nuevaRecipe = await createRecipe(title, summary, healthScore, image, steps, diets );
+    res.status(201).json("Creado Exitosamente");
 
  }catch(error){
     res.status(400).json({error: error.message})

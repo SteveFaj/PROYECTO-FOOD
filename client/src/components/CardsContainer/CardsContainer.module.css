@@ -1,4 +1,4 @@
-.container{
+/* .container{
    border: 1px solid black;
    display:flex;
    flex-direction: row;
@@ -7,4 +7,15 @@
    gap: 1em;
 
 
-}
+} */
+
+.container {
+   padding: 64px 16px;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   gap: 64px;
+   margin-bottom: 32px;
+   margin-top: 32px;
+ }

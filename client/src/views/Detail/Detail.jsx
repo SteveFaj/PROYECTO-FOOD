@@ -40,7 +40,6 @@ const Detail =  ()=>{
 // ]
 
 if(Array.isArray(detalle)){
-    console.log(detalle, "Api");
     return (
     
     <div>
@@ -74,7 +73,6 @@ if(Array.isArray(detalle)){
         
     </div>
 )}else{
-    console.log(detalle, "base de datos");
     return(
         <div className={style.detailContainer}key={detalle.id}>
         <h2>{detalle.title}</h2>
@@ -93,9 +91,7 @@ if(Array.isArray(detalle)){
             })}
         </div>
         <div className={style.steps}>
-             Paso a Paso= {detalle.steps?.map(e=>{
-                return(<li className={style.listaStep}>{e}</li>)
-            })}
+             Paso a Paso= {detalle.steps.split(".")}
         </div>
         </div>
     )

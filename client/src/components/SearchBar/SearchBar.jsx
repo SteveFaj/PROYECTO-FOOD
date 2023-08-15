@@ -3,20 +3,20 @@ import { useDispatch } from "react-redux";
 import { getByName } from "../../redux/actions";
 
 
-const SearchBar=(props)=>{
+const SearchBar=()=>{
  
-    const dispatch= useDispatch();
+    const dispatch = useDispatch();
     const [value, setValue] = useState("");
 
     const changeHandler = (event)=>{
         setValue(event.target.value)
+        
     };
 
     const dispatchHandler = (event)=>{
         event.preventDefault()
-        dispatch(getByName(value))
-        
-    }
+        dispatch(getByName(value)); 
+    };
 
     return(
         <div>

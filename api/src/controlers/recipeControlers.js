@@ -1,9 +1,10 @@
 const {Recipe, Diet} = require("../db")
 const axios = require("axios");
-const {API_KEY}= process.env;
+const {API_KEY} = process.env;
 
 const getApiRecipes= async ()=>{
-    const dataApi= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4b559c4cb96c4f208e7c4b43de66d693&addRecipeInformation=true&number=10`);
+    console.log(API_KEY, "apikey");
+    const dataApi= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`);
     const recApi= dataApi.data.results.map((rec)=>{
         const receta = {
             id: rec.id,
@@ -43,16 +44,14 @@ const getDbRecipes = async ()=>{
             healthScore: rec.healthScore,
             image: rec.image,
             summary: rec.summary,
-            steps: rec.steps?.toString().split(',').map(e=>{
+            steps: rec.steps?.toString().split('.').map(e=>{
                 return (e)
             }),
             diets: rec.diets.map(e=>{return e.name}).toString().split(','),
             created: true,
         }
-        console.log(recetaDb, "recetaaa");
         return recetaDb;
     });
-    console.log(dbMap, "dbMaaaap");
     return dbMap;
 };
 
@@ -66,9 +65,17 @@ async function getAllRecipes(){
  
 
 const createRecipe = async (title, summary, healthScore, image, steps, diets)=>{
-    const newRecipe = await Recipe.create({title, summary, healthScore, image, steps, diets});
-    dietArray = diets.split(',');
-    dietArray.map(async diet=>{
+    const newRecipe = await Recipe.create(
+        {
+          title,
+          summary,
+          healthScore,
+          image,
+          steps,
+          diets}
+          );
+   
+    diets.map(async diet=>{
         const aggDiets = await Diet.findAll({
             where:{
                 name: diet.trim()
@@ -82,8 +89,8 @@ const createRecipe = async (title, summary, healthScore, image, steps, diets)=>{
 
 const getRecipeById = async (id, source)=>{
     
-    const datosApi = await getApiRecipes();
-    let recipe = source === "api" ? await datosApi.filter((e)=>e.id == id) : await Recipe.findByPk(id);
+    const datosTotal = await getAllRecipes();
+    let recipe = await datosTotal.filter((e)=>e.id == id);
 
     return recipe; 
 

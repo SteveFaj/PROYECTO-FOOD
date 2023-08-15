@@ -1,0 +1,23 @@
+.paginadoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .paginadoContainer button {
+    border: none;
+    background-color: #03a9f4;
+    color: #ffffff;
+    padding: 8px 16px;
+    margin: 4px;
+  }
+  
+  .paginadoContainer button:hover {
+    cursor: pointer;
+    background-color: #0288d1;
+  }
+  
+  .paginadoContainer button[disabled] {
+    background-color: #b9babb;
+    cursor: default;
+  }

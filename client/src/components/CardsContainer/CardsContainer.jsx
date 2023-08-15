@@ -4,8 +4,8 @@ import style from "../CardsContainer/CardsContainer.module.css";
 
 const CardContainer = ({primerIndice, ultimoIndice})=>{
     
-    const prueba= useSelector(state=>state.recipes);
-
+    const prueba = useSelector(state=>state.recipes);
+    
     // const prueba = [
     //     {
     //         "id": 782585,
@@ -254,9 +254,15 @@ const CardContainer = ({primerIndice, ultimoIndice})=>{
     //         "created": true
     //     }
     // ]
+    if(typeof(prueba) === 'string'){
+        return (
+            <div>
+                <h4>{prueba}</h4>
+            </div>
+        )
+    }else{
 
-
-    return(
+    return (
         
         <div  className={style.container}>
             {prueba.map(recipe=>{
@@ -274,7 +280,7 @@ const CardContainer = ({primerIndice, ultimoIndice})=>{
             }).slice(primerIndice, ultimoIndice)}
         </div>
     //     
-    )
+    )}
 };
 
 export default CardContainer;
