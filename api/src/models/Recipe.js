@@ -11,7 +11,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-
     },
       title: {
         type: DataTypes.STRING,
@@ -39,7 +38,7 @@ module.exports = (sequelize) => {
       create:{
         type : DataTypes.BOOLEAN,
         defaultValue : true,
-    }
+    },
   },
   {
     timestamps: false

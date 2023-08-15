@@ -4,19 +4,19 @@ import { useDispatch } from "react-redux";
 import { getAllRecipes } from "../../redux/actions";
 
 
-const NavBar = ()=>{
+const NavBar = () => {
  
   const dispatch = useDispatch();
-  const regresar= ()=>{
+  const regresar= () => {
     dispatch(getAllRecipes())
 
   }
   return(
-    <div className = {style.mainContainer}>
-     <button onClick={regresar}>Regresar</button>
-     <Link to="/home">Home</Link>
-     <Link to="/create">Create</Link>
-   </div>
+    <div className = {style.mainContainer} key="mainContainer">
+        <button onClick={regresar}>Regresar</button>
+          <Link to="/home">Home</Link>
+          <Link to="/create">Create</Link>
+    </div>
  )
 
 };

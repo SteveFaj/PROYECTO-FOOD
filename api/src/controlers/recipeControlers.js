@@ -2,8 +2,7 @@ const {Recipe, Diet} = require("../db")
 const axios = require("axios");
 const {API_KEY} = process.env;
 
-const getApiRecipes= async ()=>{
-    console.log(API_KEY, "apikey");
+const getApiRecipes = async () => {
     const dataApi= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`);
     const recApi= dataApi.data.results.map((rec)=>{
         const receta = {
@@ -25,8 +24,7 @@ const getApiRecipes= async ()=>{
         
 };
 
-const getDbRecipes = async ()=>{
- 
+const getDbRecipes = async () => {
     const dbRecipes = await Recipe.findAll({
         include:{
             model: Diet,
@@ -37,8 +35,8 @@ const getDbRecipes = async ()=>{
         }
     });
 
-    const dbMap = await dbRecipes.map((rec)=>{
-        const recetaDb = {
+const dbMap = await dbRecipes.map((rec)=>{
+    const recetaDb = {
             id: rec.id,
             title: rec.title,
             healthScore: rec.healthScore,
@@ -55,12 +53,12 @@ const getDbRecipes = async ()=>{
     return dbMap;
 };
 
-async function getAllRecipes(){
+async function getAllRecipes () {
     const infoApi = await getApiRecipes();
     const InfoDb = await getDbRecipes();
     
     return [...infoApi, ...InfoDb];
-}
+};
 
  
 
@@ -82,21 +80,17 @@ const createRecipe = async (title, summary, healthScore, image, steps, diets)=>{
             }
         })
         await newRecipe.addDiets(aggDiets);
-    })
+    });
     return newRecipe;
-
 };
 
-const getRecipeById = async (id, source)=>{
-    
+const getRecipeById = async (id, source) => {
     const datosTotal = await getAllRecipes();
     let recipe = await datosTotal.filter((e)=>e.id == id);
-
     return recipe; 
-
 };
 
-const searchRecipeByName = async (name)=>{
+const searchRecipeByName = async (name) => {
     const allRecets = await getAllRecipes();
     const nameFilter = allRecets.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
 
@@ -104,7 +98,7 @@ const searchRecipeByName = async (name)=>{
         return nameFilter;
     }else{
         return "Dont exist Match";
-    }
-}
+    };
+};
 
 module.exports={getAllRecipes, createRecipe, getRecipeById, searchRecipeByName}

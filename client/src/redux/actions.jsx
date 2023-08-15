@@ -10,7 +10,7 @@ export const FILTER_DIETS = "FILTER_DIETS";
 export const FILTER_CREATED = "FILTER_CREATED";
 
 
-export const getAllRecipes = ()=>{
+export const getAllRecipes = () => {
     return async function(dispatch){
         const dataRecipes = await axios.get("http://localhost:3001");
         const recipes = dataRecipes.data;
