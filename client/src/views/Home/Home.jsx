@@ -2,6 +2,7 @@ import CardContainer from "../../components/CardsContainer/CardsContainer";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Paginado from "../../components/Paginado/Paginado";
 import Filter from "../../components/Filter/Filter";
+import style from "./Home.module.css";
 import {useState} from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -34,34 +35,35 @@ const Home = ()=>{
     const ultimoIndice = paginaActual * recetasPorPagina;
     const primerIndice = ultimoIndice - recetasPorPagina; 
 
-
-    return(
+    return (
         <div>
-            <Filter
+          <h1 className={style.logo}>Henry Food</h1>
+          <Filter
             diets={diets}
             setOrder={setOrder}
             setScore={setScore}
+          />
+          <SearchBar />
+    
+    
+          <CardContainer
+            ultimoIndice={ultimoIndice}
+            primerIndice={primerIndice}
+          />
+          <div>
+            <Paginado
+              recetasPorPagina={recetasPorPagina}
+              paginaActual={paginaActual}
+              setPaginaActual={setPaginaActual}
+              totalRecipes={totalRecipes}
+    
+    
             />
-            <SearchBar/>
-
-
-    <CardContainer
-        ultimoIndice={ultimoIndice}
-        primerIndice={primerIndice}
-    />
-    <div>
-        <Paginado 
-        recetasPorPagina={recetasPorPagina}
-        paginaActual={paginaActual}
-        setPaginaActual={setPaginaActual}
-        totalRecipes={totalRecipes}
-        
-        
-        />
-    </div>
+          </div>
         </div>
-
-    )
-};
-
-export default Home;
+    
+      )
+    };
+    
+    export default Home;
+    

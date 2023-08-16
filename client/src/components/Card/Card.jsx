@@ -1,4 +1,4 @@
-import style from "../Card/Card.module.css";
+import style from "./Card.module.css";
 import{Link} from "react-router-dom"
 
 const Card = (props) => {
@@ -12,7 +12,7 @@ const Card = (props) => {
              <img className = {style.imgCard} src={props.image} width="250px" height="200" alt='imgCard'/>
         </div>
             {props.diets.map(e=>{
-                return(<p> {e} </p>)
+                return (<p className={style.dietas}> {e} </p>)
             })}     
         </div>
     )

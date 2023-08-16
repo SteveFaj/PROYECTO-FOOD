@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import Card from "../Card/Card";
-import style from "../CardsContainer/CardsContainer.module.css";
+import style from "./CardsContainer.module.css";
 
 const CardContainer = ({primerIndice, ultimoIndice}) => {
     
@@ -21,12 +21,10 @@ const CardContainer = ({primerIndice, ultimoIndice}) => {
                 return <Card key={recipe.id}
                     id={recipe.id}
                     title={recipe.title}
-                    // summary={recipe.summary}
                     healthScore={recipe.healthScore}
-                    // steps={recipe.steps}
                     diets={recipe.diets}
                     image={recipe.image}
-                    // created={recipe.created}
+                    
                 />
 
             }).slice(primerIndice, ultimoIndice)}

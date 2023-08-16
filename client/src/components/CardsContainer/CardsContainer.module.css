@@ -1,23 +1,25 @@
 
 .container {
-   padding: 64px 16px;
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   justify-content: space-around;
-   gap: 64px;
-   margin-bottom: 32px;
-   margin-top: 32px;
- };
+  padding: 64px 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1200px;
+  margin: 0 auto;
+  gap: 64px;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
 
- .dontMatch{
-   background-color: blue;
-   padding: 64px 16px;
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   justify-content: space-around;
-   gap: 64px;
-   margin-bottom: 32px;
-   margin-top: 32px;
- }
+.dontMatch {
+  background-color: blue;
+  padding: 64px 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 64px;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
