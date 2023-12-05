@@ -31,22 +31,20 @@ return (
         <h1>{receta.title}</h1>
         <h5>Health Score = {receta.healthScore}</h5>
         <img className={style.imgDetail} src={receta.image} alt={receta.id} width="400px" height="300px"></img>
-        {/* <div className={style.health}>
-      </div> */}
         <p className={style.summary}>{receta.summary}</p>
-        <div className={style.steps}>
+        <div className={style.steps} key="stepsContainer">
           <h3>Preparación</h3>
-          <ul className={style.preparacion}>{receta.steps?.map(e => {
-            return (<li className={style.listaStep}>{e}</li>)
+          <ul className={style.preparacion}>{receta.steps?.map(step => {
+            return (<li className={style.listaStep} key={step}>{step}</li>)
           })}
           </ul>
         </div>
-        <div className={style.diets}>
+        <div className={style.diets} key="dietsContainer">
           <h3>Dietas</h3>
           <ul className={style.dietList}>
-            {receta.diets?.map((e) => {
+            {receta.diets?.map((diet) => {
               return (
-                <li className={style.lista}>{e.toString()}</li>
+                <li className={style.lista} key={diet}>{diet.toString()}</li>
               )
             })}
           </ul>
@@ -70,9 +68,9 @@ return (
 </div>
 <span className={style.summary}>Descripcion= {detalle.summary}</span>
 <div className={style.diets}>
-  Dietas= {detalle.diets?.map((e) => {
+  Dietas= {detalle.diets?.map((diet) => {
     return (
-      <li className={style.lista}>{e}</li>
+      <li className={style.lista} key={diet}>{diet}</li>
     )
   })}
 </div>

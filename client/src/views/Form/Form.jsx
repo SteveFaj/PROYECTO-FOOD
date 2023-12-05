@@ -5,46 +5,35 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "./Form.module.css";
 
+const validateField = (input, recipes) =>{
+  let errors = {};
+
+  if(!input.title){errors.title="Nombre Requerido"}
+  else if(!/^[A-Za-z _]+$/.test(input.title)){errors.title="No debe Incluir Numeros , ni Caracteres Especiales"}
+  else if(recipes.some((e)=> e.title.toLowerCase() === input.title.toLowerCase())){errors.title="Ya existe en el Recetario"}
+
+  else if(!input.summary){errors.summary="Debe Incluir una descripcion"}
+  else if(!/^.{5,500}$/.test(input.summary)){errors.summary="La Descripcion debe tener entre 5 y 500 caracteres"}
+
+  else if(!input.healthScore){errors.healthScore="Evalua tu Receta"}
+  else if(!/^[0-9\b]+$/.test(input.healthScore)){errors.healthScore="La evaluacion debe ser un Numero"}
+  else if(input.healthScore < 0 || input.healthScore > 100){errors.healthScore="La evaluacion debe ser entre 0 y 100"}
+
+  else if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i.test(input.image)){errors.image="No es una URL Valida"}
+
+  else if(!input.diets){errors.diets="Debe pertenecer al menos a tipo de dieta"}
+  return errors;
+
+};
+
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(getDiets());
-    dispatch(getAllRecipes());
-  }, [dispatch]);
-
   const recipes = useSelector(state => state.recipes);
   const diets = useSelector(state => state.diets);
 
-  const validateField = (field, value) => {
-    switch (field) {
-      case "title":
-        if (!value) return "Toda Receta debe tener un Nombre identificativo";
-        if (!/^[A-Za-z0-9 _]+$/.test(value)) return "No Incluir Caracteres Especiales";
-        if (recipes.some((e) => e.title.toLowerCase() === value.toLowerCase())) return "Ya existe en el Recetario";
-        return "";
-      case "summary":
-        if (!value) return "Debe incluir una descripción";
-        if (!/^.{5,500}$/.test(value)) return "La descripción debe tener entre 5 y 500 caracteres";
-        return "";
-      case "healthScore":
-        if (!value) return "Evalua tu receta";
-        if (!/^[0-9\b]+$/.test(value)) return "La evaluación debe ser un número";
-        if (value < 0 || value > 100) return "La evaluación debe ser entre 0 y 100";
-        return "";
-      case "image":
-        if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i.test(value)) return "No es una URL válida. Se aplicará una imagen por defecto";
-        return "";
-      case "diets":
-        if (!input.diets.length) return "Debe pertenecer al menos a un tipo de dieta";
-        return ""
 
-      default:
-        return "";
-    }
-  };
-
+  
   const [input, setInput] = useState({
     title: "",
     summary: "",
@@ -54,25 +43,26 @@ const Form = () => {
     diets: "",
   });
 
-  const [errors, setErrors] = useState({
-    title: "",
-    summary: "",
-    healthScore: "",
-    image: "",
-    steps: "",
-    diets: "",
-  });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    dispatch(getDiets());
+    dispatch(getAllRecipes());
+  }, [dispatch]);
+
 
   const changeHandler = (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
-
-    setInput({ ...input, [property]: value });
-
-    setErrors({
-      ...errors,
-      [property]: validateField(property, value),
-    });
+    
+    setInput({
+      ...input,
+      [event.target.name]: event.target.value
+  })
+  setErrors(
+      validateField ({
+          ...input,
+          [event.target.name]: event.target.value
+      }, recipes)
+  )
   };
 
   const checkDiets = (event) => {
@@ -80,12 +70,27 @@ const Form = () => {
       setInput({
         ...input,
         diets: [...input.diets, event.target.value],
-      });
+      })
+      setErrors(
+        validateField ({
+          ...input,
+          [event.target.name]: event.target.value
+        }, recipes)  
+      );
     } else {
       setInput({
         ...input,
         diets: input.diets.filter((dieta) => dieta !== event.target.value),
-      });
+      }) 
+      
+      setErrors(
+        validateField ({
+          ...input,
+          [event.target.name]: event.target.value
+        }, recipes)  
+      );
+      
+      
     }
   };
 
@@ -93,7 +98,8 @@ const Form = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    await axios.post("http://localhost:3001/recipes", input);
+    try{
+      await axios.post("http://localhost:3001/recipes", input);
     alert("¡Se ha creado con éxito!");
     setInput({
       title: "",
@@ -104,6 +110,11 @@ const Form = () => {
       diets: "",
     })
     history.push("/home")
+
+    }catch (error){
+      alert(JSON.stringify({error:error.message}))
+    }
+    
   };
 
   return (

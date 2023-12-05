@@ -13,13 +13,22 @@
 }
 
 .dontMatch {
-  background-color: blue;
+  background-color: rgb(228, 243, 243);
   padding: 64px 16px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 200px;
+  height: 150px;
+  margin: 0 auto;
   gap: 64px;
   margin-bottom: 32px;
   margin-top: 32px;
+  box-shadow: 1px 1px 20px -5px rgba(0,0,0,0.35);
+  
+}
+.letras{
+  font-size: 30px;
+  font-family: cursive;
 }

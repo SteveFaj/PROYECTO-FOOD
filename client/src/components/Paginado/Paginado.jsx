@@ -21,8 +21,8 @@ const especifico = (n) => {
             <button disabled={paginaActual === 1} onClick={anterior}>Previus</button>
             
         {pageNumber.map(noPage=>(
-            <button onClick={()=> especifico(noPage)}>{noPage}</button>
-             ))};
+            <button onClick={()=> especifico(noPage)} key={noPage}>{noPage}</button>
+             ))}
             
             <button disabled={paginaActual === pageNumber.length} onClick={siguiente}>Next</button>
         </div>

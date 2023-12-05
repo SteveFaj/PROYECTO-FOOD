@@ -6,26 +6,30 @@ import { filterAlpha,
      } from "../../redux/actions";
 import style from "./Filter.module.css";
 
-const Filter = ({diets, setOrder, setScore}) => {
+const Filter = ({diets, setOrder, setScore, setPaginaActual}) => {
 
     const dispatch = useDispatch();
 
     const alphaHandler = (event) => {
         dispatch(filterAlpha(event.target.value));
         setOrder(event.target.value);
+        setPaginaActual(1)
     };
 
     const scoreHandler = (event) => {
        dispatch(filterScore(event.target.value));
        setScore(event.target.value);
+       setPaginaActual(1)
     };
 
     const filterDietHandler = (event) => {
         dispatch(filterDiets(event.target.value))
+        setPaginaActual(1)
     };
 
     const filterCreateHandler = (event) => {
         dispatch(filterCreated(event.target.value))
+        setPaginaActual(1)
     };
 
 

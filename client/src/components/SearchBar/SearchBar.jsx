@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getByName } from "../../redux/actions";
 
 
-const SearchBar = () => {
+const SearchBar = ({setPaginaActual}) => {
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
 
@@ -13,7 +13,8 @@ const SearchBar = () => {
 
     const dispatchHandler = (event) => {
         event.preventDefault()
-        dispatch(getByName(value)); 
+        dispatch(getByName(value));
+        setPaginaActual(1) ;
     };
 
     return(

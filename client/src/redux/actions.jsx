@@ -12,52 +12,63 @@ export const FILTER_CREATED = "FILTER_CREATED";
 
 export const getAllRecipes = () => {
     return async function(dispatch){
-        const dataRecipes = await axios.get("http://localhost:3001");
+        try{
+            const dataRecipes = await axios.get("http://localhost:3001");
         const recipes = dataRecipes.data;
         dispatch({
             type:GET_ALL_RECIPES,
             payload: recipes
         });
+
+        }catch (error){
+            alert(JSON.stringify({error:error.message}))
+        }
     };
 };
 
 export const getRecipe = (id)=>{
     return async function(dispatch){
-        const uniRecipe =  await axios.get(`http://localhost:3001/${id}`);
-
-        const receta = uniRecipe.data;
-
-        dispatch({
-            type:GET_RECIPE,
-            payload: receta
-        });
-
+        try{
+            const uniRecipe =  await axios.get(`http://localhost:3001/${id}`);
+            const receta = uniRecipe.data;
+                dispatch({
+                    type:GET_RECIPE,
+                    payload: receta
+            });
+        }catch(error){
+            alert(JSON.stringify({error:error.message}))
+        }
     };
 };
 
 export const getDiets= ()=>{
     return async function(dispatch){
-        const dataDiets = await axios.get('http://localhost:3001/diets');
-        const diets = dataDiets.data;
-
-        dispatch({
-            type:GET_DIETS,
-            payload: diets
+        try{
+           const dataDiets = await axios.get('http://localhost:3001/diets');
+           const diets = dataDiets.data;
+               dispatch({
+                 type:GET_DIETS,
+                 payload: diets
         });
-
-};
+        }catch(error){
+            alert(JSON.stringify({error:error.message}))   
+        }
+    };
 };
 
 export const getByName = (name)=>{
     return async function (dispatch){
-        const byName = await axios.get(`http://localhost:3001/?name=${name}`);
-        const coincidencias = byName.data;
 
-        dispatch({
-            type : GET_BY_NAME,
-            payload: coincidencias
+        try{
+            const byName = await axios.get(`http://localhost:3001/?name=${name}`);
+            const coincidencias = byName.data;
+               dispatch({
+                   type : GET_BY_NAME,
+                   payload: coincidencias
         });
-
+        }catch(error){
+            alert(JSON.stringify({error:error.message})) 
+        }     
     };
 };
 

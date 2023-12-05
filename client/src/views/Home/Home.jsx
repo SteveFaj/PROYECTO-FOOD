@@ -30,7 +30,7 @@ const Home = ()=>{
 
     
     const [paginaActual, setPaginaActual] = useState(1);
-    const recetasPorPagina = 3;
+    const recetasPorPagina = 9;
     const totalRecipes = recipeList.length;
     const ultimoIndice = paginaActual * recetasPorPagina;
     const primerIndice = ultimoIndice - recetasPorPagina; 
@@ -42,8 +42,11 @@ const Home = ()=>{
             diets={diets}
             setOrder={setOrder}
             setScore={setScore}
+            setPaginaActual={setPaginaActual}
           />
-          <SearchBar />
+          <SearchBar
+          setPaginaActual={setPaginaActual}
+          />
     
     
           <CardContainer

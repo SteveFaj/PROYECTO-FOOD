@@ -12,7 +12,7 @@ const Card = (props) => {
              <img className = {style.imgCard} src={props.image} width="250px" height="200" alt='imgCard'/>
         </div>
             {props.diets.map(e=>{
-                return (<p className={style.dietas}> {e} </p>)
+                return (<i className={style.dietas} key={e}>- {e} - </i>)
             })}     
         </div>
     )

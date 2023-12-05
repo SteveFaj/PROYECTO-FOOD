@@ -39,6 +39,11 @@ module.exports = (sequelize) => {
         type : DataTypes.BOOLEAN,
         defaultValue : true,
     },
+      costo:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+      }
   },
   {
     timestamps: false

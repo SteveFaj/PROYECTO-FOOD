@@ -3,7 +3,7 @@ const axios = require("axios");
 const {API_KEY} = process.env;
 
 const getApiRecipes = async () => {
-    const dataApi= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`);
+    const dataApi= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
     const recApi= dataApi.data.results.map((rec)=>{
         const receta = {
             id: rec.id,
@@ -62,7 +62,7 @@ async function getAllRecipes () {
 
  
 
-const createRecipe = async (title, summary, healthScore, image, steps, diets)=>{
+const createRecipe = async (title, summary, healthScore, image, steps, diets, costo)=>{
     const newRecipe = await Recipe.create(
         {
           title,
@@ -70,7 +70,8 @@ const createRecipe = async (title, summary, healthScore, image, steps, diets)=>{
           healthScore,
           image,
           steps,
-          diets}
+          diets, 
+          costo}
           );
    
     diets.map(async diet=>{
@@ -97,7 +98,7 @@ const searchRecipeByName = async (name) => {
     if(nameFilter.length){
         return nameFilter;
     }else{
-        return "Dont exist Match";
+        return "No se Encontraron Coincidencias";
     };
 };
 

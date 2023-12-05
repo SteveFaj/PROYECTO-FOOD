@@ -15,7 +15,7 @@ const NavBar = () => {
     <div className = {style.mainContainer} key="mainContainer">
         <button onClick={regresar}>Regresar</button>
           <Link to="/home">Home</Link>
-          <Link to="/create">Create</Link>
+          <Link to="/create">Crea Tus Recetas</Link>
     </div>
  )
 

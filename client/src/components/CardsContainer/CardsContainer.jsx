@@ -9,7 +9,7 @@ const CardContainer = ({primerIndice, ultimoIndice}) => {
     if(typeof(prueba) === 'string'){
         return (
             <div className={style.dontMatch} key="dontMatch">
-                <h4>{prueba}</h4>
+                <h4 className={style.letras}>{prueba}</h4>
             </div>
         )
     }else{
